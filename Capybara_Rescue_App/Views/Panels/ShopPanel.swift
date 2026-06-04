@@ -21,6 +21,7 @@ struct ShopPanel: View {
     @State private var isSubscriptionRestoreLoading: Bool = false
     @State private var showIAPError: Bool = false
     @State private var showCatchTheOrangeGame: Bool = false
+    @State private var showHeaderVolleyGame: Bool = false
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
@@ -50,6 +51,14 @@ struct ShopPanel: View {
                             onPlay: {
                                 HapticManager.shared.buttonPress()
                                 showCatchTheOrangeGame = true
+                            }
+                        )
+                        HeaderVolleyCard(
+                            coinsPerDay: GameManager.headerVolleyCoinsReward,
+                            canPlayToday: gameManager.canPlayHeaderVolleyToday(),
+                            onPlay: {
+                                HapticManager.shared.buttonPress()
+                                showHeaderVolleyGame = true
                             }
                         )
                     }
@@ -122,6 +131,10 @@ struct ShopPanel: View {
         }
         .fullScreenCover(isPresented: $showCatchTheOrangeGame) {
             CatchTheOrangeView(isPresented: $showCatchTheOrangeGame)
+                .environmentObject(gameManager)
+        }
+        .fullScreenCover(isPresented: $showHeaderVolleyGame) {
+            HeaderVolleyView(isPresented: $showHeaderVolleyGame)
                 .environmentObject(gameManager)
         }
         .task {
@@ -389,6 +402,77 @@ struct CatchTheOrangeCard: View {
                 .padding(.bottom, 12)
             } else {
                 Text(L("orange.comeBackTomorrow"))
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundStyle(Self.secondaryText)
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 12)
+            }
+        }
+        .padding(.top, 24)
+        .background(
+            RoundedRectangle(cornerRadius: 20)
+                .fill(Self.cream)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(Self.settingsGreen.opacity(0.4), lineWidth: 1.5)
+                )
+        )
+    }
+}
+
+// MARK: - Header Volley Card (Get More / Shop)
+struct HeaderVolleyCard: View {
+    let coinsPerDay: Int
+    let canPlayToday: Bool
+    let onPlay: () -> Void
+    
+    private static let cream = Color(hex: "FFF8E7")
+    private static let primaryText = Color(hex: "1a1a2e")
+    private static let secondaryText = Color(hex: "5A5A5A")
+    private static let settingsGreen = Color(hex: "1a5f1a")
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 10) {
+                Text("⚽")
+                    .font(.system(size: 28))
+                Text(L("headerVolley.title"))
+                    .font(.system(size: 18, weight: .bold))
+                    .foregroundStyle(Self.primaryText)
+                Spacer()
+            }
+            .padding(.horizontal, 16)
+            
+            HStack(spacing: 6) {
+                CoinIcon(size: 22)
+                Text(String(format: L("headerVolley.coinsPerDayFormat"), Int64(coinsPerDay)))
+                    .font(.system(size: 16, weight: .regular))
+                    .foregroundStyle(Self.primaryText)
+            }
+            .padding(.horizontal, 16)
+            
+            Text(L("headerVolley.subtitle"))
+                .font(.system(size: 14, weight: .medium))
+                .foregroundStyle(Self.secondaryText)
+                .multilineTextAlignment(.leading)
+                .padding(.horizontal, 16)
+            
+            if canPlayToday {
+                Button(action: onPlay) {
+                    Text(L("headerVolley.play"))
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundStyle(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 12)
+                        .background(
+                            RoundedRectangle(cornerRadius: 14)
+                                .fill(Self.settingsGreen)
+                        )
+                }
+                .padding(.horizontal, 16)
+                .padding(.bottom, 12)
+            } else {
+                Text(L("headerVolley.comeBackTomorrow"))
                     .font(.system(size: 14, weight: .semibold))
                     .foregroundStyle(Self.secondaryText)
                     .padding(.horizontal, 16)

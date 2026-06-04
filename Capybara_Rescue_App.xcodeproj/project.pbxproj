@@ -18,6 +18,7 @@
 		23760ED5FE467A95BAB98DB1 /* AchievementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A618FE15CB488475DCDD6B0 /* AchievementsView.swift */; };
 		2379E584C1E32E56C84434C8 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE772C5EE05A58130807151 /* GameState.swift */; };
 		3456A1BB3B06498112254C18 /* CatchTheOrangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6122F799EF7CD0DB7413E76 /* CatchTheOrangeView.swift */; };
+		A8F3E2D14C9B7A6E5D0F1B2C /* HeaderVolleyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E2D1C04B8A6975E4D3F2A1B /* HeaderVolleyView.swift */; };
 		3CEC1F77093623FE7A71F1C1 /* Capybara.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 6DDFA56CF0B9269F8C2C510F /* Capybara.usdz */; };
 		3E8E0DFDF73FC5A8CFADCAEC /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3BB72E26984362DC0D3B6B /* ConfettiView.swift */; };
 		422A8C2C6783D97689E2D6E6 /* red-lantern.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 4A073C7459B483A4404B5EA2 /* red-lantern.usdz */; };
@@ -122,6 +123,7 @@
 		C4FE4DC15AEE3B9CE67EF2C9 /* LiquidMenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiquidMenuBar.swift; sourceTree = "<group>"; };
 		C5DA8216F441CA19E1F83C9F /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		C6122F799EF7CD0DB7413E76 /* CatchTheOrangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatchTheOrangeView.swift; sourceTree = "<group>"; };
+		B7E2D1C04B8A6975E4D3F2A1B /* HeaderVolleyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderVolleyView.swift; sourceTree = "<group>"; };
 		CD7F4240FC83425D7C85B11D /* Propeller hat.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Propeller hat.usdz"; sourceTree = "<group>"; };
 		D26A7EEBCDB8E330F1A8ACA3 /* CapybaraNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapybaraNameView.swift; sourceTree = "<group>"; };
 		D58CC86C80F124F3633215B7 /* Sombrero2hat.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Sombrero2hat.usdz; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 			children = (
 				6A618FE15CB488475DCDD6B0 /* AchievementsView.swift */,
 				C6122F799EF7CD0DB7413E76 /* CatchTheOrangeView.swift */,
+				B7E2D1C04B8A6975E4D3F2A1B /* HeaderVolleyView.swift */,
 				0DE1B98CAD19D6125BE4CDB7 /* OnboardingView.swift */,
 				6E07B8ADA9B36ACB51F88005 /* RunAwayView.swift */,
 				64A77CF48FE0695AFD5D975A /* SettingsView.swift */,
@@ -389,6 +392,7 @@
 				9CD6D3F9FBA0D623722D4F23 /* CapybaraViewSwitch.swift in Sources */,
 				DCD78B01254A8CD1A53B9C1C /* Capybara_Rescue_AppApp.swift in Sources */,
 				3456A1BB3B06498112254C18 /* CatchTheOrangeView.swift in Sources */,
+				A8F3E2D14C9B7A6E5D0F1B2C /* HeaderVolleyView.swift in Sources */,
 				FE8F2C04A76B19DDB0874226 /* CircularProgressView.swift in Sources */,
 				C421E3B91457752710B0B0D8 /* CoinDisplayView.swift in Sources */,
 				753D2F54FAF8045BAE685158 /* ColorExtensions.swift in Sources */,

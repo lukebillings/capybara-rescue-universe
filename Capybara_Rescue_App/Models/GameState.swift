@@ -33,6 +33,7 @@ struct GameState: Codable {
     var lastMonthlyCoinsGrantDate: Date? // For Pro Monthly: last time we granted the 10,000 coins/month
     var lastAnnualCoinsGrantDate: Date? // Pro Annual: last recurring coin grant (7-day cycle; yearly billing)
     var lastCatchTheOrangeCompletedDate: Date? // Last calendar day user completed Catch the Orange (once per day reward)
+    var lastHeaderVolleyCompletedDate: Date? // Last calendar day user completed Header Volley (once per day reward)
     /// Counters for repeatable achievements (e.g. "feed" -> total feeds, "pet" -> total pets).
     var achievementCounts: [String: Int]
     /// For repeatable achievements, last milestone we granted (e.g. "feed_10" -> 30 means granted at 10, 20, 30).
@@ -44,7 +45,7 @@ struct GameState: Codable {
         case lastLoginDate, loginStreak, earnedAchievements, statsStreak, lastStatsCheckDate
         case appOpenCount, hasRemovedBannerAds, hasCompletedOnboarding, hasCompletedTutorial
         case hasCompletedPaywall, hasGrantedOnboardingAdoptionCoins, hasAppliedEarnedAchievementRetroactiveCoinsRecovery, subscriptionTier, lastSubscriptionCheckDate, hasSeenCNY2026Popup
-        case lastWeeklyCoinsGrantDate, lastMonthlyCoinsGrantDate, lastAnnualCoinsGrantDate, lastCatchTheOrangeCompletedDate
+        case lastWeeklyCoinsGrantDate, lastMonthlyCoinsGrantDate, lastAnnualCoinsGrantDate, lastCatchTheOrangeCompletedDate, lastHeaderVolleyCompletedDate
         case achievementCounts, achievementRepeatLastGranted
     }
     
@@ -79,6 +80,7 @@ struct GameState: Codable {
         lastMonthlyCoinsGrantDate = try container.decodeIfPresent(Date.self, forKey: .lastMonthlyCoinsGrantDate)
         lastAnnualCoinsGrantDate = try container.decodeIfPresent(Date.self, forKey: .lastAnnualCoinsGrantDate)
         lastCatchTheOrangeCompletedDate = try container.decodeIfPresent(Date.self, forKey: .lastCatchTheOrangeCompletedDate)
+        lastHeaderVolleyCompletedDate = try container.decodeIfPresent(Date.self, forKey: .lastHeaderVolleyCompletedDate)
         achievementCounts = try container.decodeIfPresent([String: Int].self, forKey: .achievementCounts) ?? [:]
         achievementRepeatLastGranted = try container.decodeIfPresent([String: Int].self, forKey: .achievementRepeatLastGranted) ?? [:]
         // Backward compatibility: try earnedAchievements first, then fall back to earnedMedals
@@ -127,6 +129,7 @@ struct GameState: Codable {
         try container.encodeIfPresent(lastMonthlyCoinsGrantDate, forKey: .lastMonthlyCoinsGrantDate)
         try container.encodeIfPresent(lastAnnualCoinsGrantDate, forKey: .lastAnnualCoinsGrantDate)
         try container.encodeIfPresent(lastCatchTheOrangeCompletedDate, forKey: .lastCatchTheOrangeCompletedDate)
+        try container.encodeIfPresent(lastHeaderVolleyCompletedDate, forKey: .lastHeaderVolleyCompletedDate)
         try container.encode(achievementCounts, forKey: .achievementCounts)
         try container.encode(achievementRepeatLastGranted, forKey: .achievementRepeatLastGranted)
     }
@@ -162,6 +165,7 @@ struct GameState: Codable {
         lastMonthlyCoinsGrantDate: Date?,
         lastAnnualCoinsGrantDate: Date? = nil,
         lastCatchTheOrangeCompletedDate: Date?,
+        lastHeaderVolleyCompletedDate: Date? = nil,
         achievementCounts: [String: Int] = [:],
         achievementRepeatLastGranted: [String: Int] = [:]
     ) {
@@ -194,6 +198,7 @@ struct GameState: Codable {
         self.lastMonthlyCoinsGrantDate = lastMonthlyCoinsGrantDate
         self.lastAnnualCoinsGrantDate = lastAnnualCoinsGrantDate
         self.lastCatchTheOrangeCompletedDate = lastCatchTheOrangeCompletedDate
+        self.lastHeaderVolleyCompletedDate = lastHeaderVolleyCompletedDate
         self.achievementCounts = achievementCounts
         self.achievementRepeatLastGranted = achievementRepeatLastGranted
     }
@@ -227,7 +232,8 @@ struct GameState: Codable {
         lastWeeklyCoinsGrantDate: nil,
         lastMonthlyCoinsGrantDate: nil,
         lastAnnualCoinsGrantDate: nil,
-        lastCatchTheOrangeCompletedDate: nil
+        lastCatchTheOrangeCompletedDate: nil,
+        lastHeaderVolleyCompletedDate: nil
     )
     
     var hasActiveSubscription: Bool {

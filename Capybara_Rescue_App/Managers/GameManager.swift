@@ -483,6 +483,23 @@ class GameManager: ObservableObject {
         showToast("\(Self.catchTheOrangeCoinsReward) coins earned! 🍊")
     }
     
+    // MARK: - Header Volley (daily mini-game)
+    /// Coins awarded when user reaches the header goal in one run (once per day).
+    static let headerVolleyCoinsReward = 100
+    
+    /// True if the user has not yet completed Header Volley today (calendar day).
+    func canPlayHeaderVolleyToday() -> Bool {
+        guard let last = gameState.lastHeaderVolleyCompletedDate else { return true }
+        return !Calendar.current.isDateInToday(last)
+    }
+    
+    /// Call when user wins Header Volley. Awards coins and marks day as completed.
+    func completeHeaderVolleyGame() {
+        gameState.capycoins += Self.headerVolleyCoinsReward
+        gameState.lastHeaderVolleyCompletedDate = Date()
+        showToast("\(Self.headerVolleyCoinsReward) coins earned! ⚽")
+    }
+    
     private func checkRunAway() {
         if gameState.food == 0 && gameState.drink == 0 && gameState.happiness == 0 {
             gameState.hasRunAway = true
