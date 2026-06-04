@@ -199,6 +199,7 @@
   "orange.comeBackTomorrow": "Kembali besok! Anda sudah dapat koin hari ini.",
   "orange.successTitle": "Berhasil!",
   "orange.successBody": "Anda dapat 100 koin! Main lagi besok untuk lebih.",
+  "headerVolley.loading": "Memuat kapibara Anda…",
   "headerVolley.title": "Capy Header Volley",
   "headerVolley.coinsPerDayFormat": "%lld koin per hari",
   "headerVolley.subtitle": "Geser kapibara untuk mengeheading bola! 15 header tanpa menjatuhkan bola. Sekali per hari.",

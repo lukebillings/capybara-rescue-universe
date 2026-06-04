@@ -213,6 +213,7 @@
   "orange.comeBackTomorrow": "Volte amanhã! Você já ganhou suas moedas hoje.",
   "orange.successTitle": "Você conseguiu!",
   "orange.successBody": "Você ganhou 100 moedas! Jogue de novo amanhã.",
+  "headerVolley.loading": "Carregando sua capivara…",
   "headerVolley.title": "Capy Cabeceio",
   "headerVolley.coinsPerDayFormat": "%lld moedas por dia",
   "headerVolley.subtitle": "Arraste sua capivara para cabecear! 15 cabeceios sem deixar a bola cair. Uma vez por dia.",

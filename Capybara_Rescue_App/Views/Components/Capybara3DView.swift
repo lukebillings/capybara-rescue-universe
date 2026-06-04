@@ -176,6 +176,31 @@ struct Capybara3DView: View {
     
 }
 
+// MARK: - ARView host (SwiftUI .position() often leaves ARView at 0×0 without this)
+@available(iOS 17.0, *)
+final class RealityKitHostingView: UIView {
+    let arView: ARView
+    
+    init(arView: ARView) {
+        self.arView = arView
+        super.init(frame: .zero)
+        backgroundColor = .clear
+        arView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(arView)
+        NSLayoutConstraint.activate([
+            arView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            arView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            arView.topAnchor.constraint(equalTo: topAnchor),
+            arView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 // MARK: - iOS 17 Compatible RealityKit View Wrapper
 @available(iOS 17.0, *)
 struct RealityKitView: UIViewRepresentable {
@@ -184,6 +209,7 @@ struct RealityKitView: UIViewRepresentable {
     var equippedHat: AccessoryItem?
     var equippedGroundItems: [AccessoryItem] = []
     var previewingAccessoryId: String?
+    var isUserInteractionEnabled: Bool = true
     let onModelLoaded: () -> Void
     
     // Hat positioning constants - single source of truth
@@ -311,8 +337,9 @@ struct RealityKitView: UIViewRepresentable {
         }
     }
     
-    func makeUIView(context: Context) -> ARView {
+    func makeUIView(context: Context) -> RealityKitHostingView {
         let arView = ARView(frame: .zero, cameraMode: .nonAR, automaticallyConfigureSession: false)
+        arView.isUserInteractionEnabled = isUserInteractionEnabled
         arView.backgroundColor = .clear // Transparent background
         
         // Disable problematic rendering features
@@ -406,10 +433,14 @@ struct RealityKitView: UIViewRepresentable {
             }
         }
         
-        return arView
+        notifyModelLoadedIfNeeded(coordinator: context.coordinator)
+        return RealityKitHostingView(arView: arView)
     }
     
-    func updateUIView(_ uiView: ARView, context: Context) {
+    func updateUIView(_ uiView: RealityKitHostingView, context: Context) {
+        let arView = uiView.arView
+        arView.isUserInteractionEnabled = isUserInteractionEnabled
+        
         // Update rotation
         if let model = context.coordinator.modelEntity {
             let radians = rotationAngle * .pi / 180
@@ -462,6 +493,8 @@ struct RealityKitView: UIViewRepresentable {
         if let model = context.coordinator.modelEntity {
             updateGroundItems(items: equippedGroundItems, model: model, coordinator: context.coordinator)
         }
+        
+        notifyModelLoadedIfNeeded(coordinator: context.coordinator)
     }
     
     // Load and position ground items on the ground next to capybara
@@ -542,6 +575,16 @@ struct RealityKitView: UIViewRepresentable {
         var hatEntity: ModelEntity?
         var currentHatId: String? // Track current hat ID to detect changes
         var groundItemEntities: [String: ModelEntity] = [:] // Store ground items by item ID
+        var didNotifyModelLoaded = false
+    }
+    
+    private func notifyModelLoadedIfNeeded(coordinator: Coordinator) {
+        guard coordinator.modelEntity != nil, !coordinator.didNotifyModelLoaded else { return }
+        coordinator.didNotifyModelLoaded = true
+        // Brief delay so SwiftUI can lay out the ARView host before we treat the model as visible.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+            onModelLoaded()
+        }
     }
     
     private func loadHatModel(fileName: String?) -> ModelEntity? {

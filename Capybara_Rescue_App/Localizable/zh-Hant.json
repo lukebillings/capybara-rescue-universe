@@ -213,6 +213,7 @@
   "orange.comeBackTomorrow": "明天再來！您今天已經領過金幣了。",
   "orange.successTitle": "完成了！",
   "orange.successBody": "您獲得了 100 金幣！明天再來玩吧。",
+  "headerVolley.loading": "正在載入你的水豚…",
   "headerVolley.title": "水豚頂球",
   "headerVolley.coinsPerDayFormat": "每日 %lld 枚金幣",
   "headerVolley.subtitle": "拖動水豚頂球！連續頂 15 次且不讓球落地。每天限一次。",

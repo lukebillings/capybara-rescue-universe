@@ -213,6 +213,7 @@
   "orange.comeBackTomorrow": "Kembali esok! Anda sudah dapat syiling hari ini.",
   "orange.successTitle": "Berjaya!",
   "orange.successBody": "Anda dapat 100 syiling! Main lagi esok untuk lebih.",
+  "headerVolley.loading": "Memuatkan kapibara anda…",
   "headerVolley.title": "Capy Header Volley",
   "headerVolley.coinsPerDayFormat": "%lld syiling sehari",
   "headerVolley.subtitle": "Seret kapibara untuk mengeheading bola! 15 header tanpa menjatuhkan bola. Sekali sehari.",

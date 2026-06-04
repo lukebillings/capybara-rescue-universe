@@ -199,6 +199,7 @@
   "orange.comeBackTomorrow": "Yarın tekrar gel! Bugünkü jetonları zaten kazandın.",
   "orange.successTitle": "Başardın!",
   "orange.successBody": "100 jeton kazandın! Yarın tekrar oyna.",
+  "headerVolley.loading": "Kapibaran yükleniyor…",
   "headerVolley.title": "Capy Kafa Volesi",
   "headerVolley.coinsPerDayFormat": "Günde %lld jeton",
   "headerVolley.subtitle": "Kapibaranı sürükleyip topa kafa at! Topu düşürmeden 15 kafa vuruşu. Günde bir kez.",

@@ -223,6 +223,7 @@
   "orange.comeBackTomorrow": "Come back tomorrow! You've already earned your Coins today.",
   "orange.successTitle": "You did it!",
   "orange.successBody": "You earned 100 Coins! Play again tomorrow for more.",
+  "headerVolley.loading": "Loading your capybara…",
   "headerVolley.title": "Capy Header Volley",
   "headerVolley.coinsPerDayFormat": "%lld Coins per day",
   "headerVolley.subtitle": "Drag your capybara to head the ball! Get 15 headers without dropping it. Once per day.",

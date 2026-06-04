@@ -199,6 +199,7 @@
   "orange.comeBackTomorrow": "कल फिर आएं! आपने आज के सिक्के पहले ही कमा लिए।",
   "orange.successTitle": "आपने कर दिखाया!",
   "orange.successBody": "आपने 100 सिक्के कमाए! कल फिर खेलें।",
+  "headerVolley.loading": "आपका कपीबारा लोड हो रहा है…",
   "headerVolley.title": "कैपी हेडर वॉली",
   "headerVolley.coinsPerDayFormat": "प्रतिदिन %lld सिक्के",
   "headerVolley.subtitle": "कपीबारा खींचकर बॉल पर सिर मारें! गिराए बिना 15 हेडर। दिन में एक बार।",

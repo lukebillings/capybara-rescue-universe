@@ -9,13 +9,13 @@ struct HeaderVolleyView: View {
     
     private let targetHeaders = 15
     private let ballRadius: CGFloat = 22
-    private let capyScale: CGFloat = 0.52
-    private let capyHitRadius: CGFloat = 58
     private let gravity: CGFloat = 720
-    private let floorPadding: CGFloat = 24
+    private let floorPadding: CGFloat = 16
+    private let goalHeight: CGFloat = 112
     
     @State private var headerCount = 0
     @State private var capybaraX: CGFloat = 0
+    @State private var capyDragOriginX: CGFloat?
     @State private var ballX: CGFloat = 0
     @State private var ballY: CGFloat = 0
     @State private var ballVX: CGFloat = 0
@@ -38,27 +38,25 @@ struct HeaderVolleyView: View {
                 
                 GeometryReader { geo in
                     ZStack {
-                        pitchDecoration(size: geo.size)
+                        HeaderVolleyGoalNetView(playAreaWidth: geo.size.width)
+                            .position(
+                                x: geo.size.width / 2,
+                                y: goalNetCenterY(in: geo.size)
+                            )
+                            .allowsHitTesting(false)
+                        
+                        HeaderVolleyStaticCapybaraView()
+                            .position(x: capybaraX, y: capybaraAnchorY(in: geo.size))
+                            .allowsHitTesting(false)
                         
                         Text("⚽")
                             .font(.system(size: ballRadius * 2.1))
                             .position(x: ballX, y: ballY)
-                        
-                        HeaderVolleyCapybaraSprite(
-                            emotion: .happy,
-                            equippedAccessories: gameManager.gameState.equippedAccessories
-                        )
-                        .scaleEffect(capyScale)
-                        .position(x: capybaraX, y: capybaraBottomY(in: geo.size))
-                        .gesture(
-                            DragGesture(minimumDistance: 0)
-                                .onChanged { value in
-                                    guard !showSuccess, !showFail else { return }
-                                    capybaraX = clampCapyX(value.location.x, in: geo.size)
-                                }
-                        )
+                            .allowsHitTesting(false)
                     }
                     .frame(width: geo.size.width, height: geo.size.height)
+                    .contentShape(Rectangle())
+                    .gesture(capybaraDragGesture(in: geo.size))
                     .clipped()
                     .onAppear {
                         playAreaSize = geo.size
@@ -76,7 +74,6 @@ struct HeaderVolleyView: View {
             if showFail { failOverlay }
         }
         .id(localizationManager.currentLanguage)
-        .onAppear { startGame() }
         .onDisappear { stopGame() }
     }
     
@@ -103,17 +100,18 @@ struct HeaderVolleyView: View {
         .padding(.bottom, 8)
     }
     
-    @ViewBuilder
-    private func pitchDecoration(size: CGSize) -> some View {
-        VStack {
-            Spacer()
-            RoundedRectangle(cornerRadius: 4)
-                .fill(Color(hex: "1a5f1a").opacity(0.25))
-                .frame(height: 6)
-                .padding(.horizontal, 16)
-                .padding(.bottom, floorPadding + 8)
-        }
-        .frame(width: size.width, height: size.height)
+    private func capybaraDragGesture(in size: CGSize) -> some Gesture {
+        DragGesture(minimumDistance: 2)
+            .onChanged { value in
+                guard !showSuccess, !showFail else { return }
+                if capyDragOriginX == nil {
+                    capyDragOriginX = capybaraX
+                }
+                capybaraX = clampCapyX(capyDragOriginX! + value.translation.width, in: size)
+            }
+            .onEnded { _ in
+                capyDragOriginX = nil
+            }
     }
     
     // MARK: - Overlays
@@ -201,6 +199,10 @@ struct HeaderVolleyView: View {
         lastTickTime = nil
         headBounceCooldownUntil = .distantPast
         
+        if playAreaSize.width > 0 {
+            resetBall(in: playAreaSize)
+        }
+        
         physicsTimer?.invalidate()
         let timer = Timer(timeInterval: 1.0 / 60.0, repeats: true) { _ in
             DispatchQueue.main.async {
@@ -223,6 +225,7 @@ struct HeaderVolleyView: View {
             capybaraX = size.width / 2
             resetBall(in: size)
             hasInitializedLayout = true
+            startGame()
         } else {
             capybaraX = clampCapyX(capybaraX, in: size)
             ballX = min(max(ballRadius, ballX), size.width - ballRadius)
@@ -236,20 +239,42 @@ struct HeaderVolleyView: View {
         ballVY = 80
     }
     
-    private func capybaraBottomY(in size: CGSize) -> CGFloat {
-        size.height - floorPadding - 50
+    private func goalNetCenterY(in size: CGSize) -> CGFloat {
+        size.height - floorPadding - goalHeight / 2
     }
     
-    private func headCenter(in size: CGSize) -> CGPoint {
-        CGPoint(x: capybaraX, y: capybaraBottomY(in: size) - 95 * capyScale)
+    private func capybaraAnchorY(in size: CGSize) -> CGFloat {
+        size.height - floorPadding - goalHeight - 28
     }
     
-    private func floorY(in size: CGSize) -> CGFloat {
-        size.height - floorPadding
+    private func capybaraHitRect(in size: CGSize) -> CGRect {
+        let w = HeaderVolleyStaticCapybaraView.displayWidth * 0.95
+        let h = HeaderVolleyStaticCapybaraView.displayHeight * 0.9
+        let centerY = capybaraAnchorY(in: size)
+        return CGRect(
+            x: capybaraX - w / 2,
+            y: centerY - h / 2,
+            width: w,
+            height: h
+        )
+    }
+    
+    private func ballHitsCapybara(rect: CGRect) -> Bool {
+        let closestX = min(max(ballX, rect.minX), rect.maxX)
+        let closestY = min(max(ballY, rect.minY), rect.maxY)
+        let dx = ballX - closestX
+        let dy = ballY - closestY
+        return dx * dx + dy * dy < ballRadius * ballRadius
+    }
+    
+    /// Ball crosses this Y (into the net mouth) = miss.
+    private func goalMouthY(in size: CGSize) -> CGFloat {
+        size.height - floorPadding - goalHeight + 10
     }
     
     private func clampCapyX(_ x: CGFloat, in size: CGSize) -> CGFloat {
-        let margin: CGFloat = 90
+        // Allow sliding nearly edge-to-edge (sprite can extend slightly past the pitch).
+        let margin: CGFloat = 48
         return min(max(x, margin), size.width - margin)
     }
     
@@ -268,7 +293,6 @@ struct HeaderVolleyView: View {
         ballX += ballVX * dt
         ballY += ballVY * dt
         
-        // Side walls
         if ballX < ballRadius {
             ballX = ballRadius
             ballVX = abs(ballVX) * 0.75
@@ -277,26 +301,20 @@ struct HeaderVolleyView: View {
             ballVX = -abs(ballVX) * 0.75
         }
         
-        // Ceiling
         if ballY < ballRadius + 20 {
             ballY = ballRadius + 20
             if ballVY < 0 { ballVY = abs(ballVY) * 0.5 }
         }
         
-        // Head bounce
-        let head = headCenter(in: size)
-        let dx = ballX - head.x
-        let dy = ballY - head.y
-        let distSq = dx * dx + dy * dy
-        let hitRadius = capyHitRadius + ballRadius
+        let capyRect = capybaraHitRect(in: size)
         
-        if distSq < hitRadius * hitRadius,
+        if ballHitsCapybara(rect: capyRect),
            ballVY > 0,
            now > headBounceCooldownUntil {
             headBounceCooldownUntil = now.addingTimeInterval(0.12)
-            ballY = head.y - hitRadius * 0.85
-            ballVY = -max(320, abs(ballVY) * 0.88)
-            ballVX += dx * 1.8
+            ballY = capyRect.minY - ballRadius - 4
+            ballVY = -max(520, abs(ballVY) * 1.05)
+            ballVX += (ballX - capybaraX) * 1.4
             headerCount += 1
             HapticManager.shared.buttonPress()
             
@@ -306,8 +324,7 @@ struct HeaderVolleyView: View {
             }
         }
         
-        // Missed ground
-        if ballY > floorY(in: size) - ballRadius {
+        if ballY > goalMouthY(in: size) - ballRadius {
             HapticManager.shared.purchaseFailed()
             stopGame()
             showFail = true
@@ -315,27 +332,111 @@ struct HeaderVolleyView: View {
     }
 }
 
-// MARK: - 2D capybara sprite (no pet tap)
-private struct HeaderVolleyCapybaraSprite: View {
-    let emotion: CapybaraEmotion
-    let equippedAccessories: [String]
+// MARK: - Static capybara art (side profile, transparent PNG — instant load)
+private struct HeaderVolleyStaticCapybaraView: View {
+    static let assetName = "HeaderVolleyCapybara"
+    static let displayWidth: CGFloat = 240
+    static let displayHeight: CGFloat = 200
     
-    private var equippedHat: AccessoryItem? {
-        AccessoryItem.allItems.first { item in
-            equippedAccessories.contains(item.id) && item.isHat
-        }
+    var body: some View {
+        Image(Self.assetName)
+            .resizable()
+            .scaledToFit()
+            .frame(width: Self.displayWidth, height: Self.displayHeight)
+            .shadow(color: .black.opacity(0.15), radius: 5, y: 3)
+    }
+}
+
+// MARK: - Goal net (posts, crossbar, mesh)
+private struct HeaderVolleyGoalNetView: View {
+    let playAreaWidth: CGFloat
+    
+    private let postWidth: CGFloat = 8
+    private let crossbarHeight: CGFloat = 8
+    private let goalHeight: CGFloat = 112
+    private let frameColor = Color.white
+    
+    private var goalWidth: CGFloat {
+        max(200, playAreaWidth - 28)
     }
     
     var body: some View {
-        VStack(spacing: 0) {
-            if let hatAccessory = equippedHat {
-                Text(hatAccessory.emoji)
-                    .font(.system(size: 50))
-                    .offset(y: 20)
+        ZStack(alignment: .top) {
+            GoalNetMeshPattern(
+                width: goalWidth - postWidth * 2 - 6,
+                height: goalHeight - crossbarHeight - 10
+            )
+            .padding(.top, crossbarHeight + 6)
+            
+            VStack(spacing: 0) {
+                RoundedRectangle(cornerRadius: 2)
+                    .fill(frameColor)
+                    .frame(width: goalWidth, height: crossbarHeight)
+                    .shadow(color: .black.opacity(0.15), radius: 2, y: 1)
+                
+                HStack(alignment: .top, spacing: 0) {
+                    goalPost
+                    Spacer(minLength: 0)
+                    goalPost
+                }
+                .frame(width: goalWidth, height: goalHeight - crossbarHeight)
             }
-            CapybaraBody(emotion: emotion)
         }
-        .allowsHitTesting(false)
+        .frame(width: goalWidth, height: goalHeight)
+    }
+    
+    private var goalPost: some View {
+        RoundedRectangle(cornerRadius: 2)
+            .fill(frameColor)
+            .frame(width: postWidth, height: goalHeight - crossbarHeight)
+            .shadow(color: .black.opacity(0.12), radius: 1, x: 0, y: 1)
+    }
+}
+
+private struct GoalNetMeshPattern: View {
+    let width: CGFloat
+    let height: CGFloat
+    
+    private let meshSpacing: CGFloat = 14
+    
+    var body: some View {
+        Canvas { context, size in
+            let netRect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+            context.fill(
+                Path(roundedRect: netRect, cornerRadius: 2),
+                with: .color(Color(hex: "1a5f1a").opacity(0.12))
+            )
+            
+            var meshPath = Path()
+            var x: CGFloat = 0
+            while x <= size.width {
+                meshPath.move(to: CGPoint(x: x, y: 0))
+                meshPath.addLine(to: CGPoint(x: x, y: size.height))
+                x += meshSpacing
+            }
+            var y: CGFloat = 0
+            while y <= size.height {
+                meshPath.move(to: CGPoint(x: 0, y: y))
+                meshPath.addLine(to: CGPoint(x: size.width, y: y))
+                y += meshSpacing
+            }
+            
+            context.stroke(
+                meshPath,
+                with: .color(.white.opacity(0.5)),
+                lineWidth: 1.2
+            )
+            
+            var depthPath = Path()
+            depthPath.move(to: CGPoint(x: 0, y: 0))
+            depthPath.addLine(to: CGPoint(x: size.width / 2, y: size.height * 0.35))
+            depthPath.addLine(to: CGPoint(x: size.width, y: 0))
+            depthPath.move(to: CGPoint(x: 0, y: size.height))
+            depthPath.addLine(to: CGPoint(x: size.width / 2, y: size.height * 0.65))
+            depthPath.addLine(to: CGPoint(x: size.width, y: size.height))
+            context.stroke(depthPath, with: .color(.white.opacity(0.35)), lineWidth: 1)
+        }
+        .frame(width: width, height: height)
     }
 }
 

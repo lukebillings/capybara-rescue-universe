@@ -199,6 +199,7 @@
   "orange.comeBackTomorrow": "내일 다시 오세요! 오늘 코인은 이미 받았어요.",
   "orange.successTitle": "성공!",
   "orange.successBody": "100 코인을 받았어요! 내일 다시 플레이하세요.",
+  "headerVolley.loading": "카피바라 불러오는 중…",
   "headerVolley.title": "카피 헤딩 볼리",
   "headerVolley.coinsPerDayFormat": "하루 %lld코인",
   "headerVolley.subtitle": "카피바라를 드래그해 공을 헤딩하세요! 떨어뜨리지 않고 15회. 하루에 한 번.",

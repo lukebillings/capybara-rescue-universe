@@ -213,6 +213,7 @@
   "orange.comeBackTomorrow": "عد غداً! لقد حصلت على عملات اليوم.",
   "orange.successTitle": "أحسنت!",
   "orange.successBody": "حصلت على 100 عملة! العب غداً للمزيد.",
+  "headerVolley.loading": "جاري تحميل الكابيبارا…",
   "headerVolley.title": "كابي كرة الرأس",
   "headerVolley.coinsPerDayFormat": "%lld عملة يوميًا",
   "headerVolley.subtitle": "اسحب الكابيبارا لضرب الكرة برأسك! 15 ضربة دون إسقاطها. مرة يومياً.",
