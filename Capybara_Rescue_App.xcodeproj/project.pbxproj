@@ -18,7 +18,6 @@
 		23760ED5FE467A95BAB98DB1 /* AchievementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A618FE15CB488475DCDD6B0 /* AchievementsView.swift */; };
 		2379E584C1E32E56C84434C8 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE772C5EE05A58130807151 /* GameState.swift */; };
 		3456A1BB3B06498112254C18 /* CatchTheOrangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6122F799EF7CD0DB7413E76 /* CatchTheOrangeView.swift */; };
-		A8F3E2D14C9B7A6E5D0F1B2C /* HeaderVolleyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E2D1C04B8A6975E4D3F2A1B /* HeaderVolleyView.swift */; };
 		3CEC1F77093623FE7A71F1C1 /* Capybara.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 6DDFA56CF0B9269F8C2C510F /* Capybara.usdz */; };
 		3E8E0DFDF73FC5A8CFADCAEC /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3BB72E26984362DC0D3B6B /* ConfettiView.swift */; };
 		422A8C2C6783D97689E2D6E6 /* red-lantern.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 4A073C7459B483A4404B5EA2 /* red-lantern.usdz */; };
@@ -51,6 +50,7 @@
 		9CF47036A79B74EB3558D9B5 /* Sunflower.usdz in Resources */ = {isa = PBXBuildFile; fileRef = D929CE28E0EC27ED19506142 /* Sunflower.usdz */; };
 		A0C24DE818F55B2A9C53E283 /* LiquidMenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FE4DC15AEE3B9CE67EF2C9 /* LiquidMenuBar.swift */; };
 		A0C8E6B188B95E4E79649165 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31C4839B791F1C9749F05CFF /* Assets.xcassets */; };
+		A8F3E2D14C9B7A6E5D0F1B2C /* HeaderVolleyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7E2D1C04B8A6975E4D3F2A1B /* HeaderVolleyView.swift */; };
 		AB6D3FB53FE3222F3CC352B3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A77CF48FE0695AFD5D975A /* SettingsView.swift */; };
 		ABA7447DC17305C04E12CE91 /* Frog Hat.usdz in Resources */ = {isa = PBXBuildFile; fileRef = A08F230D1A7C33E568E3172C /* Frog Hat.usdz */; };
 		ADD7A92B99FDD449271CFEEF /* ko.json in Resources */ = {isa = PBXBuildFile; fileRef = D73C75D8EB16DFE90A74B85F /* ko.json */; };
@@ -61,12 +61,14 @@
 		BA85EC0DA43F3FBDB63816AC /* Pirate hat.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 33C575C95326CC6AB02FE373 /* Pirate hat.usdz */; };
 		BCC8D2945BEAF78CEDED5F14 /* hi.json in Resources */ = {isa = PBXBuildFile; fileRef = 4E0339DF20B7F5FB1983F7DF /* hi.json */; };
 		C29F5483F205BFB9583E30A9 /* ShopPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B9694621846B25490EFFB06 /* ShopPanel.swift */; };
+		C3D4E5F60718293A4B5C6D7 /* FootballSummerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C3D4E5F60718293A4B5C6D /* FootballSummerView.swift */; };
 		C421E3B91457752710B0B0D8 /* CoinDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB62B7FFA6666639B5F48D2 /* CoinDisplayView.swift */; };
 		CF9AD4D7C92B1EAF1E91B15F /* ja.json in Resources */ = {isa = PBXBuildFile; fileRef = F7F5B738BEBC27BD1748D5D9 /* ja.json */; };
 		D5D367EF79E4A56FA344338B /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DC24A7428511F72A1DDEED /* GameManager.swift */; };
 		DCD78B01254A8CD1A53B9C1C /* Capybara_Rescue_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9809FF92BF9017890B206434 /* Capybara_Rescue_AppApp.swift */; };
 		DFAD2A25B8C9CB20A66212A6 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB93563846587619659B7D5E /* HapticManager.swift */; };
 		E848975AC68F6C2458287A16 /* Cowboy Hat 2.usdz in Resources */ = {isa = PBXBuildFile; fileRef = EC2EF74231A629E5023A3519 /* Cowboy Hat 2.usdz */; };
+		F1A2B3C4D5E6F708192A3B4C /* Football.usdz in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A4B5C /* Football.usdz */; };
 		F95C76214A2A71ED5254A0E3 /* AdsConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC6549ADFC2EBFB8663D859 /* AdsConfig.swift */; };
 		FD1C4D48F5E96CCECC139B0F /* ar.json in Resources */ = {isa = PBXBuildFile; fileRef = 027013D567F52824E9047BAF /* ar.json */; };
 		FE8F2C04A76B19DDB0874226 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3BD89F2722C937DCB8EB19 /* CircularProgressView.swift */; };
@@ -116,14 +118,16 @@
 		9E8783D86872E6A1BD46F4A1 /* Bunny ears.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Bunny ears.usdz"; sourceTree = "<group>"; };
 		A019515F35C24D4A2E6263BD /* TutorialOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialOverlay.swift; sourceTree = "<group>"; };
 		A08F230D1A7C33E568E3172C /* Frog Hat.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Frog Hat.usdz"; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A4B5C /* Football.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Football.usdz; sourceTree = "<group>"; };
 		A4EE72BF9CE80A3679AB8F18 /* Fox Hat.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Fox Hat.usdz"; sourceTree = "<group>"; };
 		A723FD382C722A373FD6CC14 /* Pizza Hat.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Pizza Hat.usdz"; sourceTree = "<group>"; };
+		B2C3D4E5F60718293A4B5C6D /* FootballSummerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballSummerView.swift; sourceTree = "<group>"; };
 		B359131613A2EAC30706CA69 /* AppIconABExperiment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconABExperiment.swift; sourceTree = "<group>"; };
+		B7E2D1C04B8A6975E4D3F2A1B /* HeaderVolleyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderVolleyView.swift; sourceTree = "<group>"; };
 		C2C3AEDFBE8014685F7D5827 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C4FE4DC15AEE3B9CE67EF2C9 /* LiquidMenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiquidMenuBar.swift; sourceTree = "<group>"; };
 		C5DA8216F441CA19E1F83C9F /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		C6122F799EF7CD0DB7413E76 /* CatchTheOrangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatchTheOrangeView.swift; sourceTree = "<group>"; };
-		B7E2D1C04B8A6975E4D3F2A1B /* HeaderVolleyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderVolleyView.swift; sourceTree = "<group>"; };
 		CD7F4240FC83425D7C85B11D /* Propeller hat.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = "Propeller hat.usdz"; sourceTree = "<group>"; };
 		D26A7EEBCDB8E330F1A8ACA3 /* CapybaraNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapybaraNameView.swift; sourceTree = "<group>"; };
 		D58CC86C80F124F3633215B7 /* Sombrero2hat.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Sombrero2hat.usdz; sourceTree = "<group>"; };
@@ -221,6 +225,7 @@
 				64B032E7B1453C30717B18C2 /* Cone.usdz */,
 				C2C3AEDFBE8014685F7D5827 /* ContentView.swift */,
 				EC2EF74231A629E5023A3519 /* Cowboy Hat 2.usdz */,
+				A1B2C3D4E5F60718293A4B5C /* Football.usdz */,
 				A4EE72BF9CE80A3679AB8F18 /* Fox Hat.usdz */,
 				A08F230D1A7C33E568E3172C /* Frog Hat.usdz */,
 				0482BF3A81138611B9C52AD3 /* Info.plist */,
@@ -249,6 +254,7 @@
 				6A618FE15CB488475DCDD6B0 /* AchievementsView.swift */,
 				C6122F799EF7CD0DB7413E76 /* CatchTheOrangeView.swift */,
 				B7E2D1C04B8A6975E4D3F2A1B /* HeaderVolleyView.swift */,
+				B2C3D4E5F60718293A4B5C6D /* FootballSummerView.swift */,
 				0DE1B98CAD19D6125BE4CDB7 /* OnboardingView.swift */,
 				6E07B8ADA9B36ACB51F88005 /* RunAwayView.swift */,
 				64A77CF48FE0695AFD5D975A /* SettingsView.swift */,
@@ -350,6 +356,7 @@
 				3CEC1F77093623FE7A71F1C1 /* Capybara.usdz in Resources */,
 				8DA89B334F7F96B39FD5AFDA /* Cone.usdz in Resources */,
 				E848975AC68F6C2458287A16 /* Cowboy Hat 2.usdz in Resources */,
+				F1A2B3C4D5E6F708192A3B4C /* Football.usdz in Resources */,
 				0D907EB384DC6B01D7C0C71A /* Fox Hat.usdz in Resources */,
 				ABA7447DC17305C04E12CE91 /* Frog Hat.usdz in Resources */,
 				BA85EC0DA43F3FBDB63816AC /* Pirate hat.usdz in Resources */,
@@ -393,6 +400,7 @@
 				DCD78B01254A8CD1A53B9C1C /* Capybara_Rescue_AppApp.swift in Sources */,
 				3456A1BB3B06498112254C18 /* CatchTheOrangeView.swift in Sources */,
 				A8F3E2D14C9B7A6E5D0F1B2C /* HeaderVolleyView.swift in Sources */,
+				C3D4E5F60718293A4B5C6D7 /* FootballSummerView.swift in Sources */,
 				FE8F2C04A76B19DDB0874226 /* CircularProgressView.swift in Sources */,
 				C421E3B91457752710B0B0D8 /* CoinDisplayView.swift in Sources */,
 				753D2F54FAF8045BAE685158 /* ColorExtensions.swift in Sources */,
@@ -431,7 +439,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = 66VA8628J7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Capybara_Rescue_App/Info.plist;
@@ -449,7 +457,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.18;
+				MARKETING_VERSION = 1.19;
 				PRODUCT_BUNDLE_IDENTIFIER = com.capybara.rescue;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
@@ -465,7 +473,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = 66VA8628J7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Capybara_Rescue_App/Info.plist;
@@ -483,7 +491,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.18;
+				MARKETING_VERSION = 1.19;
 				PRODUCT_BUNDLE_IDENTIFIER = com.capybara.rescue;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;

@@ -12,6 +12,7 @@ struct ContentView: View {
     @State private var showRenameSheet = false
     @State private var showShopSheet = false
     @State private var showAchievementsSheet = false
+    @State private var showFootballSummerSheet = false
     @State private var showSettingsSheet = false
     @State private var showPanel = false // Hide panel by default - show only menu bar
     @State private var capybaraPosition: CGPoint = .zero
@@ -96,6 +97,15 @@ struct ContentView: View {
             showShopSheet = false
         }
         gameManager.presentBunnyEarsItemsPromo()
+    }
+    
+    private func openItemsWithFootballPromo() {
+        withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+            selectedTab = .items
+            showPanel = true
+            showShopSheet = false
+        }
+        gameManager.previewAccessory("football")
     }
     
     /// After delay: open Items + Bunny Ears nudge, or queue behind CNY popup.
@@ -334,6 +344,19 @@ struct ContentView: View {
                     .padding(.top, 12)
                     .zIndex(0) // Stats + banner behind capybara
                     
+                    Button(action: {
+                        HapticManager.shared.buttonPress()
+                        showFootballSummerSheet = true
+                    }) {
+                        FootballSummerPillLabel()
+                    }
+                    .buttonStyle(ScaleButtonStyle())
+                    .frame(maxWidth: .infinity)
+                    .padding(.horizontal, 16)
+                    .padding(.top, 8)
+                    .accessibilityLabel(L("footballSummer.title"))
+                    .accessibilityHint(L("footballSummer.topBarHint"))
+                    
                     Spacer()
                     
                     // Capybara in the center (3D) - moved up higher
@@ -531,6 +554,15 @@ struct ContentView: View {
                 .environmentObject(gameManager)
                 .presentationDetents([.large])
                 .presentationDragIndicator(.visible)
+        }
+        .sheet(isPresented: $showFootballSummerSheet) {
+            FootballSummerView {
+                showFootballSummerSheet = false
+                openItemsWithFootballPromo()
+            }
+            .environmentObject(gameManager)
+            .presentationDetents([.large])
+            .presentationDragIndicator(.visible)
         }
         .sheet(isPresented: $showSettingsSheet) {
             SettingsView()

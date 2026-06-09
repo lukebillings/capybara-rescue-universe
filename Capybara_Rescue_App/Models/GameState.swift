@@ -333,7 +333,8 @@ struct AccessoryItem: Identifiable, Equatable {
             "santahat",
             "cone",
             "pizzahat",
-            "redlantern"
+            "redlantern",
+            "football"
         ]
         
         return hatIds.contains(id)
@@ -342,6 +343,7 @@ struct AccessoryItem: Identifiable, Equatable {
     private static let _allItems: [AccessoryItem] = [
         // Regular Hats (coin prices; all players can buy). Baseball 50; most expensive hat 25,000.
         AccessoryItem(id: "baseballcap", emoji: "🧢", name: "Baseball cap", category: .gardenItems, cost: 50, modelFileName: "Baseball cap", isProOnly: false),
+        AccessoryItem(id: "football", emoji: "⚽", name: "Football", category: .gardenItems, cost: 1_000, modelFileName: "Football", isProOnly: false),
         AccessoryItem(id: "cowboyhat", emoji: "🤠", name: "Cowboy hat", category: .gardenItems, cost: 800, modelFileName: "Cowboy Hat 2", isProOnly: false),
         AccessoryItem(id: "tophat", emoji: "🎩", name: "Top hat", category: .gardenItems, cost: 1800, modelFileName: "Tophat", isProOnly: false),
         AccessoryItem(id: "wizardhat", emoji: "🧙", name: "Wizard hat", category: .gardenItems, cost: 3500, modelFileName: "Wizard hat", isProOnly: false),

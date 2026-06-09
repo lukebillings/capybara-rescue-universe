@@ -1,6 +1,13 @@
 import SwiftUI
 import SceneKit
 
+private func formattedItemCost(_ cost: Int) -> String {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .decimal
+    formatter.groupingSeparator = ","
+    return formatter.string(from: NSNumber(value: cost)) ?? "\(cost)"
+}
+
 // MARK: - Items Panel
 struct ItemsPanel: View {
     @EnvironmentObject var gameManager: GameManager
@@ -541,7 +548,7 @@ struct AccessoryItemButton: View {
                             Text("₵")
                                 .font(.system(size: 12, weight: .bold))
                                 .foregroundStyle(Color(hex: "B8860B"))
-                            Text("\(item.cost)")
+                            Text(formattedItemCost(item.cost))
                                 .font(.system(size: 14, weight: .bold))
                                 .foregroundStyle(canAfford ? Color(hex: "1a5f1a") : Color.primary.opacity(0.7))
                         }
@@ -695,6 +702,8 @@ struct HatPreviewSceneView: UIViewRepresentable {
             return 0.5
         } else if fileName.contains("red-lantern") {
             return 0.6
+        } else if fileName.contains("Football") {
+            return 0.45
         } else {
             return 0.2 // Default
         }
@@ -898,7 +907,7 @@ struct LooksGoodModal: View {
                         Text(L("common.cost"))
                             .font(.system(size: 14, weight: .medium))
                             .foregroundStyle(Self.secondaryText)
-                        Text("₵\(itemCost)")
+                        Text("₵\(formattedItemCost(itemCost))")
                             .font(.system(size: 14, weight: .bold))
                             .foregroundStyle(Color(hex: "B8860B"))
                         Text("•")
@@ -906,7 +915,7 @@ struct LooksGoodModal: View {
                         Text(L("common.youHave"))
                             .font(.system(size: 14, weight: .medium))
                             .foregroundStyle(Self.secondaryText)
-                        Text("₵\(currentCoins)")
+                        Text("₵\(formattedItemCost(currentCoins))")
                             .font(.system(size: 14, weight: .bold))
                             .foregroundStyle(Self.primaryText)
                     }
@@ -999,7 +1008,7 @@ struct InsufficientCoinsOverlay: View {
                         Text(L("common.cost"))
                             .font(.system(size: 14, weight: .medium))
                             .foregroundStyle(Self.secondaryText)
-                        Text("₵\(itemCost)")
+                        Text("₵\(formattedItemCost(itemCost))")
                             .font(.system(size: 14, weight: .bold))
                             .foregroundStyle(Color(hex: "B8860B"))
                         Text("•")
@@ -1007,7 +1016,7 @@ struct InsufficientCoinsOverlay: View {
                         Text(L("common.youHave"))
                             .font(.system(size: 14, weight: .medium))
                             .foregroundStyle(Self.secondaryText)
-                        Text("₵\(currentCoins)")
+                        Text("₵\(formattedItemCost(currentCoins))")
                             .font(.system(size: 14, weight: .bold))
                             .foregroundStyle(Self.primaryText)
                     }

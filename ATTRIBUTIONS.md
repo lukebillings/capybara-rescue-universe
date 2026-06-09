@@ -125,6 +125,16 @@ Cowboy Hat by J-Toastie [CC-BY] (https://creativecommons.org/licenses/by/3.0/) v
 - **License**: [CC-BY 3.0](https://creativecommons.org/licenses/by/3.0/)
 - **Link**: [Poly Pizza](https://poly.pizza/m/jcXfae4GiZ)
 
+## Simple Soccer Football Model
+
+Simple soccer football by Smirnoff Alexander [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza (https://poly.pizza/m/57u6P7Sr7K0)
+
+- **Model**: Simple soccer football
+- **Creator**: Smirnoff Alexander
+- **License**: [CC-BY 3.0](https://creativecommons.org/licenses/by/3.0/)
+- **Link**: [Poly Pizza](https://poly.pizza/m/57u6P7Sr7K0)
+- **File**: `Football.usdz`
+
 ---
 
 ## License Information
