@@ -247,6 +247,8 @@ struct RealityKitView: UIViewRepresentable {
     private static let pizzahatScale: SIMD3<Float> = [3.0, 3.0, 3.0]
     private static let redlanternPosition: SIMD3<Float> = [0, 4.9, 2.4] // Sphere pivot at center; Y above pizza hat so base clears the head
     private static let redlanternScale: SIMD3<Float> = [2.5, 2.5, 2.5]
+    private static let footballPosition: SIMD3<Float> = [0, 5.05, 2.3] // Ball center resting on crown of head
+    private static let footballScale: SIMD3<Float> = [1.0, 1.0, 1.0]
     
     private func hatPosition(for hatId: String?) -> SIMD3<Float> {
         guard let hatId = hatId else { return Self.hatPosition }
@@ -280,6 +282,8 @@ struct RealityKitView: UIViewRepresentable {
             return Self.pizzahatPosition
         case "redlantern":
             return Self.redlanternPosition
+        case "football":
+            return Self.footballPosition
         default:
             return Self.hatPosition
         }
@@ -317,6 +321,8 @@ struct RealityKitView: UIViewRepresentable {
             return Self.pizzahatScale
         case "redlantern":
             return Self.redlanternScale
+        case "football":
+            return Self.footballScale
         default:
             return Self.tophatScale
         }
